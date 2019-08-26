@@ -112,6 +112,14 @@ function css() {
     .pipe(browsersync.stream());
 }
 
+// Images task
+function images() {
+  return gulp
+      .src("./img/**/*")
+      .pipe(gulp.dest("./src/img"))
+      .pipe(browsersync.stream());
+}
+
 // JS task
 function js() {
   return gulp
@@ -132,20 +140,23 @@ function js() {
 
 // Watch files
 function watchFiles() {
+  gulp.watch("./index.html", pages);
   gulp.watch("./scss/**/*", css);
   gulp.watch(["./js/**/*", "!./js/**/*.min.js"], js);
+  gulp.watch("./img/**/*", images);
   gulp.watch("./**/*.html", browserSyncReload);
 }
 
 // Define complex tasks
 const vendor = gulp.series(clean, modules);
-const build = gulp.series(vendor, gulp.parallel(pages, css, js));
+const build = gulp.series(vendor, gulp.parallel(pages, css, js, images));
 const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 
 // Export tasks
 exports.pages = pages;
 exports.css = css;
 exports.js = js;
+exports.images = images;
 exports.clean = clean;
 exports.vendor = vendor;
 exports.build = build;
