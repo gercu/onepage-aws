@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/contact-form",
+            "lambdaFunction": "onepage",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "onepage",
+    "apiName": "onepage",
+    "functionArns": [
+        {
+            "lambdaFunction": "onepage"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "onepage-test-20190820142748-authRole",
+        "unAuthRoleName": "onepage-test-20190820142748-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "onepage",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "9a198697"
+}

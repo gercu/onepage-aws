@@ -1,0 +1,178 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Lambda resource stack creation using Amplify CLI",
+	"Parameters": {
+		"env": {
+			"Type": "String"
+		}
+	},
+	"Conditions": {
+		"ShouldNotCreateEnvResources": {
+			"Fn::Equals": [
+				{
+					"Ref": "env"
+				},
+				"NONE"
+			]
+		}
+	},
+	"Resources": {
+		"LambdaFunction": {
+			"Type": "AWS::Lambda::Function",
+			"Metadata": {
+				"aws:asset:path": "./src",
+				"aws:asset:property": "Code"
+			},
+			"Properties": {
+				"Handler": "index.handler",
+				"FunctionName": {
+					"Fn::If": [
+						"ShouldNotCreateEnvResources",
+						"onepage-contact-form",
+						{
+							"Fn::Join": [
+								"",
+								[
+									"onepage-contact-form",
+									"-",
+									{
+										"Ref": "env"
+									}
+								]
+							]
+						}
+					]
+				},
+				"Environment": {
+					"Variables": {
+						"ENV": {
+							"Ref": "env"
+						},
+						"REGION": {
+							"Ref": "AWS::Region"
+						}
+					}
+				},
+				"Role": {
+					"Fn::GetAtt": [
+						"LambdaExecutionRole",
+						"Arn"
+					]
+				},
+				"Runtime": "nodejs10.x",
+				"Timeout": "5",
+				"Code": {
+					"S3Bucket": "onepage-test-20190820142748-deployment",
+					"S3Key": "amplify-builds/onepage-646531777751322f4e53-build.zip"
+				}
+			}
+		},
+		"LambdaExecutionRole": {
+			"Type": "AWS::IAM::Role",
+			"Properties": {
+				"RoleName": {
+					"Fn::If": [
+						"ShouldNotCreateEnvResources",
+						"onepageLambdaRole2d1e9b9f",
+						{
+							"Fn::Join": [
+								"",
+								[
+									"onepageLambdaRole2d1e9b9f",
+									"-",
+									{
+										"Ref": "env"
+									}
+								]
+							]
+						}
+					]
+				},
+				"AssumeRolePolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"Service": [
+									"lambda.amazonaws.com"
+								]
+							},
+							"Action": [
+								"sts:AssumeRole"
+							]
+						}
+					]
+				}
+			}
+		},
+		"lambdaexecutionpolicy": {
+			"DependsOn": [
+				"LambdaExecutionRole"
+			],
+			"Type": "AWS::IAM::Policy",
+			"Properties": {
+				"PolicyName": "lambda-execution-policy",
+				"Roles": [
+					{
+						"Ref": "LambdaExecutionRole"
+					}
+				],
+				"PolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Sid": "VisualEditor0",
+							"Effect": "Allow",
+							"Action": [
+								"logs:CreateLogStream",
+								"logs:PutLogEvents"
+							],
+							"Resource": "arn:aws:logs:eu-west-1:521314655487:log-group:/aws/lambda/onepage-contact-form-test:log-stream:*"
+						},
+						{
+							"Sid": "VisualEditor1",
+							"Effect": "Allow",
+							"Action": [
+								"ses:SendEmail",
+								"ses:SendRawEmail"
+							],
+							"Resource": "*"
+						},
+						{
+							"Sid": "VisualEditor2",
+							"Effect": "Allow",
+							"Action": "logs:CreateLogGroup",
+							"Resource": "arn:aws:logs:eu-west-1:521314655487:log-group:/aws/lambda/onepage-contact-form-test:log-stream:*"
+						}
+					]
+				}
+			}
+		}
+	},
+	"Outputs": {
+		"Name": {
+			"Value": {
+				"Ref": "LambdaFunction"
+			}
+		},
+		"Arn": {
+			"Value": {
+				"Fn::GetAtt": [
+					"LambdaFunction",
+					"Arn"
+				]
+			}
+		},
+		"Region": {
+			"Value": {
+				"Ref": "AWS::Region"
+			}
+		},
+		"LambdaExecutionRole": {
+			"Value": {
+				"Ref": "LambdaExecutionRole"
+			}
+		}
+	}
+}
