@@ -8,8 +8,8 @@
             }
         }
     ],
-    "resourceName": "onepage",
-    "apiName": "onepage",
+    "resourceName": "onepageApi",
+    "apiName": "onepageApi",
     "functionArns": [
         {
             "lambdaFunction": "onepage"
@@ -30,6 +30,5 @@
                 "Arn"
             ]
         }
-    ],
-    "uuid": "9a198697"
+    ]
 }

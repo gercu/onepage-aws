@@ -1,13 +1,13 @@
 {
     "test": {
         "awscloudformation": {
-            "AuthRoleName": "onepage-test-20190820142748-authRole",
-            "UnauthRoleArn": "arn:aws:iam::521314655487:role/onepage-test-20190820142748-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::521314655487:role/onepage-test-20190820142748-authRole",
+            "AuthRoleName": "onepage-test-authRole",
+            "UnauthRoleArn": "arn:aws:iam::521314655487:role/onepage-test-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::521314655487:role/onepage-test-authRole",
             "Region": "eu-west-1",
-            "DeploymentBucketName": "onepage-test-20190820142748-deployment",
-            "UnauthRoleName": "onepage-test-20190820142748-unauthRole",
-            "StackName": "onepage-test-20190820142748",
+            "DeploymentBucketName": "onepage-test-deployment",
+            "UnauthRoleName": "onepage-test-unauthRole",
+            "StackName": "onepage-test",
             "StackId": "arn:aws:cloudformation:eu-west-1:521314655487:stack/onepage-test-20190820142748/ec366ba0-c345-11e9-9a7b-061c3112010a"
         }
     }

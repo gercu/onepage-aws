@@ -42,16 +42,16 @@
     "Resources": {
         
         
-      "onepage": {
+      "onepageApi": {
         "Type": "AWS::ApiGateway::RestApi",
         "Properties": {
           "Description": "",
-          "Name": "onepage",
+          "Name": "onepageApi",
           "Body": {
             "swagger": "2.0",
             "info": {
               "version": "2018-05-24T17:52:00Z",
-              "title": "onepage"
+              "title": "onepageApi"
             },
             "host": {
                 "Fn::Join": [
@@ -329,7 +329,7 @@
                   
         
         
-        "functiononepagePermissiononepage": {
+        "functiononepagePermissiononepageApi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
@@ -353,7 +353,7 @@
                             },
                             ":",
                             {
-                                "Ref": "onepage"
+                                "Ref": "onepageApi"
                             },
                             "/*/*/*"
                         ]
@@ -364,7 +364,7 @@
         
         
         
-      "DeploymentAPIGWonepage9a198697": {
+      "DeploymentAPIGWonepageApi": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
@@ -378,7 +378,7 @@
             ]
           },
           "RestApiId": {
-            "Ref": "onepage"
+            "Ref": "onepageApi"
           }
         }
       }
@@ -386,11 +386,11 @@
     "Outputs": {
         "RootUrl": {
             "Description": "Root URL of the API gateway",
-            "Value": {"Fn::Join": ["", ["https://", {"Ref": "onepage"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
+            "Value": {"Fn::Join": ["", ["https://", {"Ref": "onepageApi"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
         },
         "ApiName": {
           "Description": "API Friendly name",
-          "Value": "onepage"
+          "Value": "onepageApi"
         }
     }
   }

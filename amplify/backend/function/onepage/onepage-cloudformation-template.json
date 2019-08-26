@@ -63,7 +63,7 @@
 				"Timeout": "5",
 				"Code": {
 					"S3Bucket": "onepage-test-20190820142748-deployment",
-					"S3Key": "amplify-builds/onepage-646531777751322f4e53-build.zip"
+					"S3Key": "amplify-builds/onepage-69564d54532b68795667-build.zip"
 				}
 			}
 		},
