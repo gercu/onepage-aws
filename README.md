@@ -1,4 +1,4 @@
-# [Start Bootstrap - Creative](https://startbootstrap.com/template-overviews/creative/)
+# Onepage-AWS
 
 Easy way to develop, test and upload serverless one page sites to AWS using [Amplify](https://aws-amplify.github.io/). 
 
