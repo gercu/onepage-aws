@@ -12,6 +12,7 @@ const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const uglify = require("gulp-uglify");
+const htmlmin = require('gulp-htmlmin');
 
 // Load package.json for banner
 const pkg = require('./package.json');
@@ -73,6 +74,18 @@ function modules() {
   return merge(bootstrap, fontAwesomeCSS, fontAwesomeWebfonts, jquery, jqueryEasing, magnificPopup);
 }
 
+// HTML task
+function pages() {
+  return gulp
+      .src('./*.html')
+      .pipe(htmlmin({
+        collapseWhitespace: true,
+        removeComments: true
+      }))
+      .pipe(gulp.dest('./src'))
+      .pipe(browsersync.stream());
+}
+
 // CSS task
 function css() {
   return gulp
@@ -126,10 +139,11 @@ function watchFiles() {
 
 // Define complex tasks
 const vendor = gulp.series(clean, modules);
-const build = gulp.series(vendor, gulp.parallel(css, js));
+const build = gulp.series(vendor, gulp.parallel(pages, css, js));
 const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 
 // Export tasks
+exports.pages = pages;
 exports.css = css;
 exports.js = js;
 exports.clean = clean;

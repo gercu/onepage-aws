@@ -38,7 +38,7 @@ exports.handler = (event, context) => {
     if (err) {
       console.log("error!")
       console.log(err);
-      return context.fail(err);
+      context.fail(err);
     } else {
       console.log("Email sent");
 

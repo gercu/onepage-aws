@@ -47,6 +47,7 @@
         "gulp-rename": "1.4.0",
         "gulp-sass": "4.0.2",
         "gulp-uglify": "3.0.2",
+        "gulp-htmlmin": "^5.0.1",
         "merge-stream": "2.0.0",
         "webpack": "^4.17.1",
         "webpack-cli": "^3.1.0",
