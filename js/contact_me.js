@@ -20,7 +20,7 @@ $(function() {
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
             $.ajax({
-                url: "https://t1yfamjfs1.execute-api.eu-west-1.amazonaws.com/test/contact-form",
+                url: "https://xh1nltgyah.execute-api.eu-west-1.amazonaws.com/test/contact-form",
                 method: "post",
                 dataType: "json",
                 crossDomain: true,

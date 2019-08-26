@@ -103,7 +103,6 @@ function css() {
     .pipe(header(banner, {
       pkg: pkg
     }))
-    .pipe(gulp.dest("./css"))
     .pipe(rename({
       suffix: ".min"
     }))
