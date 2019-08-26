@@ -6,7 +6,7 @@
 		}
 	},
 	"function": {
-		"onepage": {
+		"onepageHandleContactForm": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true
@@ -19,7 +19,7 @@
 			"dependsOn": [
 				{
 					"category": "function",
-					"resourceName": "onepage",
+					"resourceName": "onepageApi",
 					"attributes": [
 						"Name",
 						"Arn"
